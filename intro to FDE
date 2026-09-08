@@ -1,13 +1,3 @@
-Absolutely. For GitHub, I’d make it **clean, structured, and easy to revise later**, rather than keeping it like lecture notes.
-
-Here’s a ready-to-paste `README.md` version:
-
-# Forward Deployed Engineering & AI Fundamentals
-
-Notes from a lecture on **Forward Deployed Engineering (FDE)** and the evolution of **Artificial Intelligence**, from rule-based systems to modern Large Language Models (LLMs).
-
----
-
 ## Table of Contents
 
 * [1. What is a Forward Deployed Engineer?](#1-what-is-a-forward-deployed-engineer)
