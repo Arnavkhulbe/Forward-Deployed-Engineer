@@ -1,0 +1,1493 @@
+Absolutely. For GitHub, I’d make it **clean, structured, and easy to revise later**, rather than keeping it like lecture notes.
+
+Here’s a ready-to-paste `README.md` version:
+
+# Forward Deployed Engineering & AI Fundamentals
+
+Notes from a lecture on **Forward Deployed Engineering (FDE)** and the evolution of **Artificial Intelligence**, from rule-based systems to modern Large Language Models (LLMs).
+
+---
+
+## Table of Contents
+
+* [1. What is a Forward Deployed Engineer?](#1-what-is-a-forward-deployed-engineer)
+* [2. What Does "Forward Deployed" Mean?](#2-what-does-forward-deployed-mean)
+* [3. Raw Requirement vs Actual Problem](#3-raw-requirement-vs-actual-problem)
+* [4. Rule-Based AI](#4-rule-based-ai)
+* [5. Problems with Rule-Based AI](#5-problems-with-rule-based-ai)
+* [6. ELIZA](#6-eliza)
+* [7. Turing Test](#7-turing-test)
+* [8. Artificial Intelligence](#8-artificial-intelligence)
+* [9. Traditional Programming](#9-traditional-programming)
+* [10. Machine Learning](#10-machine-learning)
+* [11. Supervised and Unsupervised Learning](#11-supervised-and-unsupervised-learning)
+* [12. Neural Networks](#12-neural-networks)
+* [13. Feature Engineering](#13-feature-engineering)
+* [14. Natural Language Processing](#14-natural-language-processing)
+* [15. Statistical Language Models](#15-statistical-language-models)
+* [16. RNNs](#16-rnns)
+* [17. Transformers](#17-transformers)
+* [18. Large Language Models](#18-large-language-models)
+* [19. GPT](#19-gpt)
+* [20. FDE + AI: Putting Everything Together](#20-fde--ai-putting-everything-together)
+* [21. AI Evolution Summary](#21-ai-evolution-summary)
+* [22. Key Takeaways](#22-key-takeaways)
+
+---
+
+# 1. What is a Forward Deployed Engineer?
+
+A **Forward Deployed Engineer (FDE)** is an engineer who works closely with customers, clients, departments, operations teams, and management to understand real-world problems and build solutions for them.
+
+A normal software engineer may receive a well-defined engineering ticket:
+
+```text
+Requirement
+    ↓
+Write Code
+    ↓
+Test
+    ↓
+Deploy
+```
+
+An FDE works much earlier in the process:
+
+```text
+Real-World Problem
+        ↓
+Understand the Problem
+        ↓
+Understand Requirements
+        ↓
+Define the Actual Requirement
+        ↓
+Design a Solution
+        ↓
+Build the Solution
+        ↓
+Deploy to Production
+```
+
+The FDE therefore does more than simply write code.
+
+They understand:
+
+* The customer's problem
+* The actual workflow
+* Business constraints
+* Operational requirements
+* Technical constraints
+* Possible solutions
+* How the solution will be used in production
+
+---
+
+# 2. What Does "Forward Deployed" Mean?
+
+The word **deployed** has a different meaning here.
+
+In normal software development:
+
+```text
+Deploy Application
+=
+Put the application on a server/environment
+```
+
+In **Forward Deployed Engineer**, "deployed" means placing the engineer close to the environment where the actual problem occurs.
+
+For example, an e-commerce company may have thousands of customer-support queries.
+
+The company might say:
+
+> "We need an AI chatbot."
+
+The FDE does not immediately start building the chatbot.
+
+Instead, they investigate:
+
+```text
+What problem are we actually solving?
+Who is experiencing the problem?
+Why is the current process inefficient?
+What outcome does the company want?
+```
+
+---
+
+# 3. Raw Requirement vs Actual Problem
+
+A company might give a vague requirement:
+
+```text
+"Build an AI chatbot."
+```
+
+But this is not necessarily the real problem.
+
+The actual problem might be:
+
+```text
+Too many customer-support queries
+            +
+Human employees handle repetitive questions
+            +
+Customers have to wait
+            +
+Support employees have limited working hours
+```
+
+Therefore, the actual objective might be:
+
+```text
+Reduce customer-support resolution time
+while maintaining accuracy and customer trust.
+```
+
+This is one of the most important ideas in Forward Deployed Engineering:
+
+> **Do not simply implement the requested technology. Understand the problem behind the request.**
+
+---
+
+# 4. Rule-Based AI
+
+One of the earliest approaches to Artificial Intelligence was **rule-based AI**.
+
+The basic idea is:
+
+```text
+IF condition
+THEN action
+```
+
+For example, consider voting eligibility:
+
+```text
+IF age < 18
+    PRINT "Not eligible to vote"
+
+ELSE
+    PRINT "Eligible to vote"
+```
+
+This is simply a predefined rule.
+
+Another example:
+
+```text
+IF device does not turn on
+AND battery percentage == 0
+THEN
+    PRINT "Charge your device"
+```
+
+The system appears to understand the problem, but internally it is simply following predefined rules.
+
+---
+
+# 5. Rule-Based AI: E-Commerce Example
+
+Suppose an e-commerce company wants to determine whether an order is eligible for a refund.
+
+We may have these facts:
+
+```text
+Order is returnable
+Order is damaged
+Order was delivered 3 days ago
+```
+
+We can create a rule:
+
+```text
+IF product was delivered within 7 days
+AND order is damaged
+AND product is returnable
+
+THEN
+    customer is eligible for reimbursement
+```
+
+The `AND` operator means that **all conditions must be true**.
+
+Therefore:
+
+```text
+Delivered within 7 days → TRUE
+Damaged → TRUE
+Returnable → TRUE
+```
+
+Result:
+
+```text
+Eligible for reimbursement → TRUE
+```
+
+From the user's perspective, this may look like reasoning.
+
+Internally, however, the system is simply executing predefined rules.
+
+---
+
+# 6. Problems with Rule-Based AI
+
+The biggest problem is **natural language**.
+
+A user will not necessarily provide structured data such as:
+
+```json
+{
+  "returnable": true,
+  "damaged": true,
+  "delivered_within_7_days": true
+}
+```
+
+Instead, the user may write:
+
+```text
+"I want to return my order."
+```
+
+Or:
+
+```text
+"Return my order."
+```
+
+Or:
+
+```text
+"I need a refund for this product."
+```
+
+Or:
+
+```text
+"Can I send this item back?"
+```
+
+All of these may represent a similar intention.
+
+A rule-based system would need many rules to handle these variations.
+
+This can eventually become:
+
+```text
+IF ...
+ELSE IF ...
+ELSE IF ...
+ELSE IF ...
+ELSE IF ...
+ELSE IF ...
+...
+```
+
+The number of rules can become extremely large.
+
+---
+
+# 7. Natural Language Problem
+
+Human language is complicated.
+
+Humans can understand:
+
+* Different languages
+* Sarcasm
+* Emotions
+* Context
+* Incomplete information
+* Different sentence structures
+* Unfamiliar problems
+* Negation
+* References
+
+For example:
+
+```text
+"Very good job.
+My order hasn't arrived for 15 days."
+```
+
+A simple system might interpret:
+
+```text
+"Very good job"
+```
+
+as positive feedback.
+
+A human may understand that the sentence is actually sarcastic.
+
+Therefore, understanding language requires more than matching individual words.
+
+---
+
+# 8. ELIZA
+
+**ELIZA** was an early chatbot that could produce surprisingly human-like conversations.
+
+Example:
+
+```text
+User:
+I am feeling unhappy.
+
+ELIZA:
+Why are you feeling unhappy?
+
+User:
+My friends don't understand me.
+
+ELIZA:
+Why do you think your friends don't understand you?
+
+User:
+They never listen to me.
+
+ELIZA:
+Can you tell me more about them?
+```
+
+It appears intelligent.
+
+However, ELIZA primarily relied on predefined patterns and rules.
+
+Conceptually:
+
+```text
+IF user says:
+
+"I am feeling <something>"
+
+THEN respond:
+
+"Why are you feeling <something>?"
+```
+
+Another rule could be:
+
+```text
+IF user talks about friends
+
+THEN ask:
+
+"Can you tell me more about them?"
+```
+
+Therefore, the system could imitate a conversation without actually possessing human-like understanding.
+
+---
+
+# 9. Turing Test
+
+In 1950, **Alan Turing** asked a famous question:
+
+> Can machines think?
+
+But the problem is that "think" and "intelligence" are difficult to define.
+
+Instead of directly defining intelligence, Turing proposed a practical test.
+
+### Basic Setup
+
+```text
+             Human Evaluator
+                    |
+             Text Communication
+               /           \
+              /             \
+          Human           Machine
+```
+
+The evaluator communicates with both participants through text.
+
+The evaluator does not know which one is the machine.
+
+If the evaluator cannot reliably distinguish the machine from the human, the machine has passed the **Turing Test**.
+
+The important idea is:
+
+```text
+Observable Behaviour
+        ↓
+Can the machine convincingly imitate
+human-like communication?
+```
+
+This also introduces an important philosophical question:
+
+> If a machine can imitate intelligence so well that we cannot distinguish it from human intelligence, should we consider it intelligent?
+
+---
+
+# 10. Artificial Intelligence
+
+The term **Artificial Intelligence (AI)** became established as a field of computer science in the 1950s.
+
+The basic goal was:
+
+```text
+Create machines that can perform
+tasks requiring human-like intelligence.
+```
+
+Human intelligence includes abilities such as:
+
+```text
+Understanding language
+Understanding emotions
+Solving unfamiliar problems
+Making decisions
+Learning patterns
+Creating explanations
+Generating stories
+```
+
+The challenge was:
+
+```text
+How do we convert intelligence
+into something a machine can perform?
+```
+
+---
+
+# 11. Traditional Programming
+
+Traditional computers work using explicit instructions.
+
+For example:
+
+```text
+Input
+  ↓
+Program / Instructions
+  ↓
+Output
+```
+
+For:
+
+```text
+2 + 2
+```
+
+the result is:
+
+```text
+4
+```
+
+The programmer explicitly defines the instructions.
+
+Traditional programming therefore relies heavily on:
+
+* Variables
+* Loops
+* Conditions
+* Functions
+* Data structures
+* Algorithms
+
+The instructions are precise and generally deterministic.
+
+For example:
+
+```text
+2 + 2 → 4
+2 + 3 → 5
+```
+
+---
+
+# 12. Machine Learning
+
+The problem with manually programming every possible rule is that many real-world problems are too complicated.
+
+Machine Learning changes the approach.
+
+Instead of:
+
+```text
+Human writes every rule
+        ↓
+Computer follows rules
+```
+
+we use:
+
+```text
+Training Data
+      ↓
+Learning Algorithm
+      ↓
+Model
+```
+
+The model learns patterns from examples.
+
+For example:
+
+```text
+Dog Image → DOG
+Dog Image → DOG
+Dog Image → DOG
+
+Cat Image → CAT
+Cat Image → CAT
+Cat Image → CAT
+```
+
+After training:
+
+```text
+New Image
+    ↓
+Trained Model
+    ↓
+DOG
+```
+
+The model learned patterns from the training data instead of requiring humans to manually write every rule.
+
+---
+
+# 13. Supervised and Unsupervised Learning
+
+## Supervised Learning
+
+The training data contains labels.
+
+```text
+Input → Label
+
+Image → Dog
+Image → Dog
+Image → Cat
+Image → Cat
+```
+
+The model learns to predict the label.
+
+---
+
+## Unsupervised Learning
+
+The data does not contain explicit labels.
+
+```text
+Image
+Image
+Image
+Image
+Image
+```
+
+The model attempts to discover patterns or groups within the data.
+
+Conceptually:
+
+```text
+Similar Data
+     ↓
+Group 1
+
+Similar Data
+     ↓
+Group 2
+```
+
+---
+
+# 14. What is a Model?
+
+A model can be thought of as a function:
+
+```text
+Input
+  ↓
+MODEL
+  ↓
+Output
+```
+
+For example:
+
+```text
+Image
+  ↓
+Image Classification Model
+  ↓
+Dog
+```
+
+Or:
+
+```text
+Text
+  ↓
+Language Model
+  ↓
+Generated Text
+```
+
+Internally, models contain **parameters**.
+
+During training, these parameters are adjusted so that the model produces better outputs.
+
+---
+
+# 15. Feature Engineering
+
+Traditional Machine Learning often required humans to identify useful features.
+
+For example, if we want to classify images, the computer ultimately receives numerical pixel information.
+
+Humans may try to identify useful characteristics:
+
+```text
+Shape
+Edges
+Texture
+Color
+Patterns
+```
+
+These characteristics can become features for the model.
+
+The problem is that complicated problems can contain enormous numbers of useful patterns.
+
+Manually designing all of them becomes difficult.
+
+This is one reason neural networks became important.
+
+---
+
+# 16. Neural Networks
+
+Neural Networks allow models to learn complex patterns using layers of interconnected units.
+
+Conceptually:
+
+```text
+Input Layer
+     ↓
+Hidden Layer
+     ↓
+Hidden Layer
+     ↓
+Hidden Layer
+     ↓
+Output Layer
+```
+
+Each connection has learned parameters called **weights**.
+
+For example, suppose we want to determine whether a support ticket is urgent.
+
+We could have:
+
+```text
+x1 = contains "urgent"
+x2 = payment failed
+x3 = customer contacted support multiple times
+x4 = account is locked
+```
+
+The network may calculate something conceptually similar to:
+
+```text
+z = w1*x1 + w2*x2 + w3*x3 + w4*x4
+```
+
+Where:
+
+```text
+w1, w2, w3, w4
+```
+
+are learned weights.
+
+During training, the model adjusts these weights based on examples.
+
+Therefore:
+
+```text
+Training Data
+      ↓
+Learn Weights
+      ↓
+Neural Network
+      ↓
+Prediction
+```
+
+---
+
+# 17. Deep Learning
+
+When neural networks contain many layers, they are commonly associated with **Deep Learning**.
+
+The relationship can be represented as:
+
+```text
+Artificial Intelligence
+        ↓
+Machine Learning
+        ↓
+Neural Networks
+        ↓
+Deep Learning
+```
+
+Deep learning became especially powerful when combined with:
+
+* Large datasets
+* More computational power
+* Better algorithms
+* GPUs
+* Improved neural-network architectures
+
+---
+
+# 18. Computer Vision
+
+Neural networks became extremely powerful for image-related tasks.
+
+This led to major progress in:
+
+* Face recognition
+* Image classification
+* Object detection
+* Automatic image tagging
+* Computer vision systems
+
+A major architecture used for image processing is:
+
+> **CNN — Convolutional Neural Network**
+
+Conceptually:
+
+```text
+Image
+  ↓
+CNN
+  ↓
+Learned Visual Features
+  ↓
+Prediction
+```
+
+---
+
+# 19. Natural Language Processing
+
+Although neural networks worked very well for images, language remained difficult.
+
+Consider:
+
+```text
+"The dog chased the man."
+```
+
+and:
+
+```text
+"The man chased the dog."
+```
+
+The words are almost identical.
+
+But the meaning is completely different.
+
+Similarly:
+
+```text
+"I am hungry."
+```
+
+and:
+
+```text
+"I am not hungry."
+```
+
+The word `not` completely changes the meaning.
+
+Therefore, language models need to understand:
+
+```text
+Word meaning
++
+Word order
++
+Context
++
+Relationships
++
+Negation
++
+Intent
+```
+
+---
+
+# 20. Statistical Language Models
+
+Before modern LLMs, statistical approaches were used for language modelling.
+
+Suppose the training data contains:
+
+```text
+I like machine learning.
+I like Java programming.
+Students like machine learning.
+```
+
+We can examine what appears after:
+
+```text
+"like"
+```
+
+Occurrences:
+
+```text
+like → machine
+like → Java
+like → machine
+```
+
+Therefore:
+
+```text
+P(machine | like) = 2/3
+
+P(Java | like) = 1/3
+```
+
+So if the model sees:
+
+```text
+"I like ..."
+```
+
+it may predict:
+
+```text
+machine
+```
+
+because it has the highest probability.
+
+---
+
+# 21. N-Grams
+
+Statistical language models used concepts such as **n-grams**.
+
+### Unigram
+
+One word:
+
+```text
+word
+```
+
+### Bigram
+
+Two words:
+
+```text
+word1 word2
+```
+
+### Trigram
+
+Three words:
+
+```text
+word1 word2 word3
+```
+
+The more context we include:
+
+```text
+More Context
+     ↓
+Potentially Better Prediction
+```
+
+But this approach still struggles with the enormous variety of human language.
+
+---
+
+# 22. RNNs
+
+Next came **Recurrent Neural Networks (RNNs)**.
+
+RNNs are designed for sequential data.
+
+For example:
+
+```text
+The
+ ↓
+payment
+ ↓
+has
+ ↓
+not
+ ↓
+been
+ ↓
+refunded
+```
+
+The RNN maintains an internal state.
+
+Conceptually:
+
+```text
+Word 1
+  ↓
+State 1
+
+Word 2 + State 1
+  ↓
+State 2
+
+Word 3 + State 2
+  ↓
+State 3
+```
+
+The state carries information from previous words.
+
+---
+
+# 23. Problem with RNNs
+
+The major problem is **long-term context**.
+
+As the sequence becomes longer:
+
+```text
+Word 1
+Word 2
+Word 3
+...
+Word 100
+```
+
+information from earlier parts can become difficult to preserve.
+
+The model is essentially maintaining a compressed representation of previous information.
+
+Therefore:
+
+```text
+Long Sequence
+      ↓
+Context Compression
+      ↓
+Older Information May Be Lost
+```
+
+This limited the ability of RNNs to effectively handle very long contexts.
+
+---
+
+# 24. Transformers
+
+A major breakthrough came in **2017** with the paper:
+
+> **Attention Is All You Need**
+
+This introduced the **Transformer architecture**.
+
+Transformers changed how models process language.
+
+Instead of relying on a sequential hidden state like an RNN, Transformers use **attention** to determine relationships between different parts of the input.
+
+---
+
+# 25. Attention
+
+Consider:
+
+```text
+Aditya gave Rohit the laptop because he needed it for work.
+```
+
+We need to understand:
+
+```text
+"he"
+```
+
+and:
+
+```text
+"it"
+```
+
+What does `he` refer to?
+
+What does `it` refer to?
+
+Attention allows the model to examine relationships between words.
+
+Conceptually:
+
+```text
+             Aditya
+                ↘
+Rohit ───────→ "he" ←──── work
+                ↑
+              laptop
+```
+
+Different words receive different levels of relevance.
+
+The important point is:
+
+> **The model learns these relationships from data rather than humans manually programming every relationship.**
+
+---
+
+# 26. Transformers vs RNNs
+
+### RNN
+
+```text
+Word 1
+  ↓
+Word 2
+  ↓
+Word 3
+  ↓
+Word 4
+```
+
+Information is passed sequentially.
+
+### Transformer
+
+```text
+Entire Context
+      ↓
+Attention
+      ↓
+Relationships between tokens
+      ↓
+Representation
+```
+
+The Transformer can directly model relationships between different parts of the context.
+
+This made it much more effective for large-scale language modelling.
+
+---
+
+# 27. Large Language Models
+
+Transformers enabled researchers to build increasingly large language models.
+
+These are called:
+
+> **Large Language Models (LLMs)**
+
+Examples include:
+
+* ChatGPT
+* Claude
+* Gemini
+* DeepSeek
+
+LLMs are trained using:
+
+```text
+Large Datasets
+      +
+Large Neural Networks
+      +
+Large Computational Resources
+```
+
+They learn patterns in language and can generate text based on input.
+
+---
+
+# 28. Why LLMs are Generative
+
+Traditional ML might perform classification:
+
+```text
+Email
+ ↓
+Spam / Not Spam
+```
+
+An LLM can generate new text:
+
+```text
+Prompt
+ ↓
+LLM
+ ↓
+Generated Response
+```
+
+For example:
+
+```text
+Input:
+Explain recursion.
+
+Output:
+Recursion is a technique where...
+```
+
+This is why these models are called **Generative AI** models.
+
+---
+
+# 29. GPT
+
+GPT stands for:
+
+```text
+G = Generative
+P = Pre-trained
+T = Transformer
+```
+
+### Generative
+
+The model generates content.
+
+### Pre-trained
+
+The model is trained beforehand on large amounts of data.
+
+### Transformer
+
+The underlying architecture is based on the Transformer architecture.
+
+Therefore:
+
+```text
+GPT
+=
+Generative
++
+Pre-trained
++
+Transformer
+```
+
+---
+
+# 30. Why LLMs Need Context
+
+Return to the e-commerce chatbot.
+
+Suppose the customer asks:
+
+```text
+"Can I return my order after 15 days?"
+```
+
+A general LLM might generate:
+
+```text
+"Yes, you can return your order within 30 days."
+```
+
+But suppose the actual company policy is:
+
+```text
+Returns are allowed only within 7 days.
+```
+
+The LLM may not automatically know the company's private internal policy.
+
+Therefore, the application needs to provide relevant context.
+
+For example:
+
+```text
+User Query
+    +
+Company Return Policy
+    +
+Order Information
+    +
+Previous Conversation
+    ↓
+LLM
+    ↓
+Context-Aware Response
+```
+
+This is an important foundation for techniques such as providing external information/context to LLMs.
+
+---
+
+# 31. FDE + AI: Putting Everything Together
+
+Now combine the two major topics of the lecture.
+
+A company says:
+
+```text
+"We need an AI chatbot."
+```
+
+The FDE should not immediately choose an LLM.
+
+Instead:
+
+```text
+                    Business Problem
+                           ↓
+                   Raw Requirement
+                           ↓
+                "Build an AI chatbot"
+                           ↓
+                           FDE
+                           ↓
+                  Understand the Problem
+                           ↓
+                  Define Actual Requirement
+                           ↓
+                  Evaluate Possible Solutions
+                     /        |        \
+                    /         |         \
+           Rule-Based AI      ML        LLM
+                    \         |         /
+                     \        |        /
+                       Choose Solution
+                           ↓
+                     Build Solution
+                           ↓
+                    Production Deployment
+```
+
+The solution could involve:
+
+```text
+Rules
++
+Machine Learning
++
+LLMs
++
+Company Data
++
+Application Logic
+```
+
+The technology should be selected based on the actual problem.
+
+---
+
+# 32. AI Evolution Summary
+
+The overall evolution can be remembered as:
+
+```text
+Traditional Programming
+        ↓
+Rule-Based AI
+        ↓
+Machine Learning
+        ↓
+Neural Networks
+        ↓
+Deep Learning
+        ↓
+CNNs
+        ↓
+Statistical Language Models
+        ↓
+RNNs
+        ↓
+Transformers
+        ↓
+Large Language Models
+        ↓
+Generative AI
+```
+
+---
+
+# 33. Traditional Programming vs ML vs LLM
+
+| Approach                | Main Idea                              |
+| ----------------------- | -------------------------------------- |
+| Traditional Programming | Humans explicitly write rules          |
+| Rule-Based AI           | AI follows predefined rules            |
+| Machine Learning        | Model learns patterns from data        |
+| Neural Networks         | Learn complex patterns through weights |
+| RNN                     | Processes sequential information       |
+| Transformer             | Uses attention to model relationships  |
+| LLM                     | Large Transformer-based language model |
+| Generative AI           | Generates new content                  |
+
+---
+
+# 34. Important Terminology
+
+### AI
+
+Artificial Intelligence — the broad field of creating systems capable of performing tasks associated with intelligence.
+
+### ML
+
+Machine Learning — systems learn patterns from data.
+
+### Neural Network
+
+A machine-learning architecture consisting of interconnected computational units with learned parameters.
+
+### Deep Learning
+
+Machine learning based heavily on multi-layer neural networks.
+
+### NLP
+
+Natural Language Processing — processing and understanding human language.
+
+### RNN
+
+Recurrent Neural Network — neural network architecture designed for sequential data.
+
+### Transformer
+
+Neural-network architecture based heavily on attention mechanisms.
+
+### LLM
+
+Large Language Model — a large neural language model capable of processing and generating text.
+
+### GPT
+
+Generative Pre-trained Transformer.
+
+---
+
+# 35. Key Takeaways
+
+### Forward Deployed Engineering
+
+```text
+Don't start with:
+"What code should I write?"
+
+Start with:
+"What problem are we actually solving?"
+```
+
+An FDE:
+
+* Works closely with users/customers.
+* Understands real workflows.
+* Converts vague requirements into structured requirements.
+* Evaluates possible technical solutions.
+* Builds the solution.
+* Helps deploy the solution into production.
+
+---
+
+### AI Evolution
+
+The central evolution is:
+
+```text
+Write the rules yourself
+        ↓
+Let machines learn patterns
+        ↓
+Let neural networks learn complex patterns
+        ↓
+Use attention to understand relationships
+        ↓
+Scale Transformers into LLMs
+```
+
+---
+
+### Most Important Mental Model
+
+```text
+Rules
+ ↓
+Learning
+ ↓
+Neural Networks
+ ↓
+Sequence Models
+ ↓
+Attention
+ ↓
+Transformers
+ ↓
+LLMs
+ ↓
+Generative AI
+```
+
+---
+
+## Final Summary
+
+The lecture connects **Forward Deployed Engineering** with the evolution of AI.
+
+An FDE's job is to take a **real-world problem**, understand it deeply, convert it into a proper requirement, choose an appropriate technical solution, build it, and help bring it into production.
+
+The AI portion explains why we moved from:
+
+```text
+Explicit Rules
+```
+
+to:
+
+```text
+Machine Learning
+```
+
+then:
+
+```text
+Neural Networks
+```
+
+then:
+
+```text
+RNNs
+```
+
+and finally:
+
+```text
+Transformers
+```
+
+which enabled modern:
+
+```text
+Large Language Models
+        ↓
+Generative AI
+```
+
+The most important concept is that modern AI is not simply a collection of manually written `if/else` rules. Modern models **learn patterns and relationships from large amounts of data**, and Transformers use **attention** to model relationships within context.
