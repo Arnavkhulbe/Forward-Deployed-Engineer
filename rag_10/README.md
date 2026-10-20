@@ -15,6 +15,9 @@ Add Information to the LLM Context
      |
      v
 LLM Generates an Answer
+
+
+
 1. How Does a Normal LLM Work?
 A Large Language Model generates text by predicting tokens one after another.
 
@@ -29,6 +32,8 @@ Input: "The capital of India is"
 The model continues generating tokens until it produces a complete response.
 
 An LLM answers using the information available in its trained knowledge and the context provided to it. A normal LLM does not automatically have access to every previous conversation or private company document.
+
+
 2. Conversation History as Memory
 An application can store previous messages and send them to the LLM with a new question.
 
@@ -45,6 +50,9 @@ Problems with sending all history
 - Higher cost: Many LLM services charge based on the number of input and output tokens.
 - Limited context window: A model can process only a limited amount of context in one request.
 This motivates retrieving only the information needed for a particular question.
+
+
+
 3. Why Not Put All Knowledge in the System Prompt?
 Imagine building an e-commerce chatbot that needs to answer questions about:
 - Refund policies
@@ -57,6 +65,9 @@ Putting every company policy into the system prompt may make it extremely long. 
 For example, a question about returning shoes needs relevant return-policy information—not every payment, shipping, and account document.
 
 RAG addresses this problem by retrieving relevant information before the LLM generates its answer.
+
+
+
 4. The Three Parts of RAG
 RAG has three stages:
 R — Retrieval
@@ -72,6 +83,9 @@ Augmentation -> Add it to the prompt/context
      |
      v
 Generation -> LLM produces an answer
+
+
+
 5. What Is an Embedding?
 An embedding is a numerical representation of text, created by an embedding model. It is represented as a vector—a list of numbers.
 
@@ -82,6 +96,9 @@ might be converted into a vector similar in form to:
 The numbers above are illustrative, not an actual embedding.
 
 Embedding models are designed so that texts with related meanings can have similar vector representations. This helps a system search for meaning, not just exact keyword matches.
+
+
+
 6. What Is a Vector Database?
 A vector database stores vectors and supports searches for vectors similar to a query vector. In RAG, it can store embeddings for chunks of documents, along with the original text and associated metadata.
 
@@ -100,6 +117,9 @@ Numerical Vector
       v
 Vector Database
 The original text is important: the LLM generally needs the retrieved text, not just the vector's numbers.
+
+
+
 7. What Is Similarity Search?
 When a user asks a question, the system converts the question into an embedding and searches the vector database for relevant chunks.
 
@@ -119,6 +139,8 @@ Common similarity measures
 Vector search can use efficient indexing algorithms, such as HNSW and IVF, to speed up retrieval in large collections.
 
 Similarity search is not a guarantee that the retrieved text is correct or sufficient. Retrieval quality depends on the embeddings, chunking, search settings, and source documents.
+
+
 8. Why Do We Need Chunking?
 Documents can be very large. A PDF might contain hundreds of pages and cover several topics.
 
@@ -141,6 +163,8 @@ Create an embedding for each chunk
 For example, one chunk might contain return-policy information while another contains payment information. Smaller chunks help the system retrieve more specific content.
 
 Chunk size matters: chunks that are too large may contain too many unrelated topics, while chunks that are too small may lose important context.
+
+
 9. Chunk Overlap
 A chunk boundary can split a sentence or an important piece of information.
 
@@ -157,6 +181,8 @@ Chunk 2 = words 801–1800
 Here, words 801–1000 appear in both chunks.
 
 Overlap can preserve context across boundaries, although it also creates some repeated content and increases the number of stored chunks.
+
+
 10. The Indexing Phase
 Before users ask questions, the documents must be prepared for retrieval. This is commonly called the indexing phase.
 Documents / PDFs
@@ -176,6 +202,8 @@ Store Vectors and Text
        v
 Vector Database
 This phase prepares the knowledge base. It is separate from the process that handles each user's question.
+
+
 11. The Query Phase
 When a user asks a question, the system retrieves the most relevant information.
 Step 1 — Receive the question
@@ -210,6 +238,8 @@ LLM
       |
       v
 Final Answer
+
+
 12. Complete RAG Architecture
 RAG has two connected workflows: indexing and question answering.
 Indexing
@@ -244,6 +274,8 @@ LLM
     v
 Generated Answer
 The vector database supplies relevant external information; the LLM uses that information to generate a natural-language answer.
+
+
 13. RAG vs. a Normal LLM
 Normal LLM
 User Question
@@ -268,6 +300,8 @@ Add Retrieved Context
       v
     Answer
 RAG gives the LLM relevant external information at question time. It does not permanently train the model on the retrieved documents.
+
+
 14. RAG vs. Conversation Memory
 These are related but different concepts.
 Conversation history	RAG
@@ -278,6 +312,9 @@ Often sent as part of the current prompt	Retrieved text is added to the current 
 
 
 A system can use both conversation history and RAG together.
+
+
+
 15. Important Terminology
 Term	Meaning
 LLM	A model that generates text
